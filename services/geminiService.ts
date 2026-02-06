@@ -9,7 +9,23 @@ export const getDealerCommentary = async (
   result: 'correct' | 'wrong' | 'start',
   score: number
 ): Promise<string> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  const apiKey = process.env.API_KEY || '';
+  
+  // If no API key, return fallback messages instead of calling Gemini
+  if (!apiKey) {
+    if (result === 'start') {
+      return "Let's see if you can beat the odds. First card is dealt.";
+    }
+    if (result === 'correct') {
+      if (score >= 3) {
+        return "You win this round. Impressive.";
+      }
+      return "Lucky guess. Try again.";
+    }
+    return "Wrong call. Better luck next time.";
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
   
   const prompt = result === 'start' 
     ? `You are a slick, mysterious casino dealer in a high-stakes card game called "Ace High". 
