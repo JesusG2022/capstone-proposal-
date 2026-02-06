@@ -1,0 +1,5 @@
+{
+  "name": "Ace High: The Dealer's Gambit",
+  "description": "A high-stakes Higher or Lower card game featuring a witty AI dealer powered by Gemini. Win three rounds in a row to beat the house, or lose everything on a single bad call.",
+  "requestFramePermissions": []
+}
